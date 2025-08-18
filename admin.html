@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - API Service</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-shield-alt"></i>
+                Admin Panel
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">
+                    <i class="fas fa-home"></i> Home
+                </a>
+                <button id="adminLogoutBtn" class="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </nav>
+        </header>
+
+        <div id="adminLogin" class="admin-login">
+            <div class="form-container">
+                <div class="form-header">
+                    <i class="fas fa-lock"></i>
+                    <h1>Admin Authentication</h1>
+                    <p>Enter your admin credentials</p>
+                </div>
+
+                <form id="adminLoginForm" class="api-form">
+                    <div class="form-group">
+                        <label for="adminEmail">
+                            <i class="fas fa-envelope"></i>
+                            Admin Email
+                        </label>
+                        <input 
+                            type="email" 
+                            id="adminEmail" 
+                            placeholder="admin@example.com"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="adminPassword">
+                            <i class="fas fa-key"></i>
+                            Password
+                        </label>
+                        <input 
+                            type="password" 
+                            id="adminPassword" 
+                            placeholder="Enter admin password"
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Access Admin Panel
+                        <div class="loading-spinner"></div>
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <main id="adminDashboard" class="admin-dashboard hidden">
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <div class="stat-info">
+                        <h3 id="totalUsers">0</h3>
+                        <p>Total Users</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-crown"></i>
+                    <div class="stat-info">
+                        <h3 id="paidUsers">0</h3>
+                        <p>Paid Users</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-play"></i>
+                    <div class="stat-info">
+                        <h3 id="freeUsers">0</h3>
+                        <p>Free Users</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-chart-line"></i>
+                    <div class="stat-info">
+                        <h3 id="todayAPICalls">0</h3>
+                        <p>Today's API Calls</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="admin-sections">
+                <div class="admin-section">
+                    <div class="section-header">
+                        <i class="fas fa-users"></i>
+                        <h3>User Management</h3>
+                        <button id="refreshUsers" class="btn-refresh">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table id="usersTable" class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>User ID</th>
+                                    <th>Email</th>
+                                    <th>Status</th>
+                                    <th>UID</th>
+                                    <th>Payment Date</th>
+                                    <th>Last API Call</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Users will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="admin-section">
+                    <div class="section-header">
+                        <i class="fas fa-history"></i>
+                        <h3>API Call Logs</h3>
+                        <button id="refreshLogs" class="btn-refresh">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="table-container">
+                        <table id="logsTable" class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Timestamp</th>
+                                    <th>User ID</th>
+                                    <th>UID</th>
+                                    <th>Status</th>
+                                    <th>Response</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Logs will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="admin-section">
+                    <div class="section-header">
+                        <i class="fas fa-cog"></i>
+                        <h3>System Settings</h3>
+                    </div>
+                    
+                    <div class="settings-grid">
+                        <div class="setting-item">
+                            <label>Daily Automation Time</label>
+                            <input type="time" id="automationTime" value="00:00">
+                            <button class="btn btn-small">Update</button>
+                        </div>
+                        <div class="setting-item">
+                            <label>Subscription Price (₹)</label>
+                            <input type="number" id="subscriptionPrice" value="99">
+                            <button class="btn btn-small">Update</button>
+                        </div>
+                        <div class="setting-item">
+                            <label>API Endpoint Status</label>
+                            <div class="status-indicator" id="apiStatus">
+                                <span class="status-dot active"></span>
+                                <span>Active</span>
+                            </div>
+                            <button class="btn btn-small" id="testAPI">Test</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

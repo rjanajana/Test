@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "routes": [
+    {
+      "src": "/api/call-external",
+      "dest": "/api/call-external.py"
+    },
+    {
+      "src": "/api/daily-automation",
+      "dest": "/api/daily-automation.py"
+    },
+    {
+      "src": "/admin",
+      "dest": "/admin.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
+    }
+  ],
+  "crons": [
+    {
+      "path": "/api/daily-automation",
+      "schedule": "0 0 * * *"
+    }
+  ],
+  "functions": {
+    "api/call-external.py": {
+      "maxDuration": 30
+    },
+    "api/daily-automation.py": {
+      "maxDuration": 300
+    }
+  }
+}

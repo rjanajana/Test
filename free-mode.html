@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Mode - API Service</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <a href="index.html" class="logo">
+                <i class="fas fa-arrow-left"></i>
+                Back to Home
+            </a>
+        </header>
+
+        <main class="form-page">
+            <div class="form-container">
+                <div class="form-header">
+                    <i class="fas fa-play-circle"></i>
+                    <h1>Free Mode</h1>
+                    <p>Make a one-time API call with your UID</p>
+                </div>
+
+                <form id="freeForm" class="api-form">
+                    <div class="form-group">
+                        <label for="freeUid">
+                            <i class="fas fa-user"></i>
+                            Enter your UID
+                        </label>
+                        <input 
+                            type="text" 
+                            id="freeUid" 
+                            name="uid" 
+                            placeholder="Enter your unique identifier"
+                            required
+                        >
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-rocket"></i>
+                        Make API Call
+                        <div class="loading-spinner"></div>
+                    </button>
+                </form>
+
+                <div id="freeResults" class="results hidden">
+                    <div class="results-header">
+                        <i class="fas fa-check-circle"></i>
+                        <h3>API Response</h3>
+                    </div>
+                    <div id="freeResultsContent" class="results-content"></div>
+                </div>
+
+                <div id="freeError" class="error-message hidden">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span id="freeErrorText"></span>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
